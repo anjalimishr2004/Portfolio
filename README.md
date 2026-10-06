@@ -8,7 +8,7 @@ Hi, I'm **Anjali Mishra**, a Computer Science undergraduate and Web Developer pa
 
 I enjoy turning ideas into practical digital experiences that are intuitive, responsive, and purposeful. I'm continuously learning, experimenting with new technologies, and improving through hands-on projects.
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 * **Frontend:** HTML, CSS, JavaScript, React.js
 * **Backend:** Node.js, Express.js
@@ -17,7 +17,7 @@ I enjoy turning ideas into practical digital experiences that are intuitive, res
 * **Tools:** Git, GitHub, VS Code, Postman, Vercel
 * **Build Tool:** Vite
 
-## 🚀 Featured Projects
+##  Featured Projects
 
 ### Cosmo Learn
 
@@ -43,7 +43,7 @@ A responsive web application for finding routes between Delhi Metro stations and
 
 [View Source Code](https://github.com/anjalimishr2004/delhi-metro-route-finder)
 
-## 🎓 Education
+##  Education
 
 **B.Tech in Computer Science & Engineering**
 BBS College of Engineering & Technology
@@ -78,7 +78,7 @@ Portfolio/
 └── .gitignore
 ```
 
-## 💻 Getting Started
+## Getting Started
 
 Clone the repository:
 
@@ -106,7 +106,7 @@ npm run dev
 
 The project will then be available on the local development server shown in your terminal.
 
-## 📬 Connect With Me
+##  Connect With Me
 
 * **GitHub:** https://github.com/anjalimishr2004
 * **LinkedIn:** https://linkedin.com/in/anjalimishra
