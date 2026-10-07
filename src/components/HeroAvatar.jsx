@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 
 const HeroAvatar = () => {
@@ -38,9 +37,16 @@ const HeroAvatar = () => {
     }
   };
 
-  const handleMouseLeave = () => {
-    setGaze('center');
-  };
+  // Track mouse anywhere on the page
+  useEffect(() => {
+    if (!showStaticImage) return;
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [showStaticImage]);
 
   // Play video only once
   useEffect(() => {
@@ -107,8 +113,6 @@ const HeroAvatar = () => {
       {/* Frame */}
       <div
         ref={frameRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
         style={{
           position: 'relative',
           zIndex: 1,
@@ -205,4 +209,3 @@ const HeroAvatar = () => {
 };
 
 export default HeroAvatar;
-
