@@ -54,7 +54,20 @@ const HeroAvatar = () => {
       setGaze(normalizedY < 0 ? 'up' : 'down');
     }
   };
+useEffect(() => {
+  const images = [
+    '/avatar-center.png',
+    '/avatar-left.png',
+    '/avatar-right.png',
+    '/avatar-up.png',
+    '/avatar-down.png'
+  ];
 
+  images.forEach((src) => {
+    const img = new Image();
+    img.src = src;
+  });
+}, []);
   // Track mouse across the page
   useEffect(() => {
     if (!showStaticImage) return;
