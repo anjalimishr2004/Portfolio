@@ -13,6 +13,7 @@ const HeroAvatar = () => {
 
   // Eye tracking
   const handleMouseMove = (e) => {
+    console.log('MOUSE MOVE', showStaticImage);
     if (!showStaticImage || !frameRef.current) return;
 
     const rect = frameRef.current.getBoundingClientRect();
