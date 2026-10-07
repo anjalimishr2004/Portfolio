@@ -54,28 +54,45 @@ const HeroAvatar = () => {
       setGaze(normalizedY < 0 ? 'up' : 'down');
     }
   };
-useEffect(() => {
-  const images = [
-    '/avatar-center.png',
-    '/avatar-left.png',
-    '/avatar-right.png',
-    '/avatar-up.png',
-    '/avatar-down.png'
-  ];
 
-  images.forEach((src) => {
-    const img = new Image();
-    img.src = src;
-  });
-}, []);
-  // Track mouse across the page
+  // Preload all avatar images
+  useEffect(() => {
+    const images = [
+      '/avatar-center.png',
+      '/avatar-left.png',
+      '/avatar-right.png',
+      '/avatar-up.png',
+      '/avatar-down.png'
+    ];
+
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
+  // Track mouse across the page + reset when tab loses focus
   useEffect(() => {
     if (!showStaticImage) return;
 
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        setGaze('center');
+      }
+    };
+
+    const handleWindowBlur = () => {
+      setGaze('center');
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('blur', handleWindowBlur);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('blur', handleWindowBlur);
     };
   }, [showStaticImage]);
 
