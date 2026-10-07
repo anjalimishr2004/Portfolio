@@ -13,32 +13,49 @@ const HeroAvatar = () => {
 
   // Eye tracking
   const handleMouseMove = (e) => {
-    console.log('MOUSE MOVE', showStaticImage);
     if (!showStaticImage || !frameRef.current) return;
 
     const rect = frameRef.current.getBoundingClientRect();
 
-    const x = (e.clientX - rect.left) / rect.width;
-    const y = (e.clientY - rect.top) / rect.height;
+    // Check whether cursor is inside the avatar frame
+    const isInside =
+      e.clientX >= rect.left &&
+      e.clientX <= rect.right &&
+      e.clientY >= rect.top &&
+      e.clientY <= rect.bottom;
 
-    const dx = x - 0.5;
-    const dy = y - 0.5;
-
-    const distance = Math.sqrt(dx * dx + dy * dy);
-
-    if (distance < 0.10) {
+    // Outside frame → eyes return to center
+    if (!isInside) {
       setGaze('center');
       return;
     }
 
-    if (Math.abs(dx) > Math.abs(dy)) {
-      setGaze(dx < 0 ? 'left' : 'right');
+    const x = e.clientX - (rect.left + rect.width / 2);
+    const y = e.clientY - (rect.top + rect.height / 2);
+
+    const normalizedX = x / (rect.width / 2);
+    const normalizedY = y / (rect.height / 2);
+
+    const threshold = 0.18;
+
+    // Near center
+    if (
+      Math.abs(normalizedX) < threshold &&
+      Math.abs(normalizedY) < threshold
+    ) {
+      setGaze('center');
+      return;
+    }
+
+    // Horizontal vs vertical direction
+    if (Math.abs(normalizedX) > Math.abs(normalizedY)) {
+      setGaze(normalizedX < 0 ? 'left' : 'right');
     } else {
-      setGaze(dy < 0 ? 'up' : 'down');
+      setGaze(normalizedY < 0 ? 'up' : 'down');
     }
   };
 
-  // Track mouse anywhere on the page
+  // Track mouse across the page
   useEffect(() => {
     if (!showStaticImage) return;
 
